@@ -1,39 +1,55 @@
-# Simple Calculator using Python
+# Calculator using OOPS
 
-while True:
-    print("\n----- Simple Calculator -----")
-    print("1. Addition")
-    print("2. Subtraction")
-    print("3. Multiplication")
-    print("4. Division")
-    print("5. Exit")
+class Calculator:
 
-    choice = input("Enter your choice (1-5): ")
+    def __init__(self, first_number, operation, second_number):
+        self.first_number = first_number
+        self.operation = operation
+        self.second_number = second_number
 
-    # Exit condition
-    if choice == '5':
-        print("Calculator Closed")
-        break
+    def add(self):
+        return self.first_number + self.second_number
 
-    # Taking numbers from user
-    num1 = float(input("Enter first number: "))
-    num2 = float(input("Enter second number: "))
+    def subtract(self):
+        return self.first_number - self.second_number
 
-    # Conditional statements
-    if choice == '1':
-        print("Result =", num1 + num2)
+    def multiply(self):
+        return self.first_number * self.second_number
 
-    elif choice == '2':
-        print("Result =", num1 - num2)
+    def divide(self):
+        if self.second_number == 0:
+            raise ValueError("Cannot divide by zero")
+        return self.first_number / self.second_number
 
-    elif choice == '3':
-        print("Result =", num1 * num2)
 
-    elif choice == '4':
-        if num2 != 0:
-            print("Result =", num1 / num2)
-        else:
-            print("Error! Division by zero not allowed.")
+def main():
+    first_number = float(input("Enter first number: "))
+    operation = input("Enter the operation (+, -, *, /): ")
+    second_number = float(input("Enter second number: "))
+
+    calculator = Calculator(first_number, operation, second_number)
+
+    if calculator.operation == '+':
+        result = calculator.add()
+
+    elif calculator.operation == '-':
+        result = calculator.subtract()
+
+    elif calculator.operation == '*':
+        result = calculator.multiply()
+
+    elif calculator.operation == '/':
+        try:
+            result = calculator.divide()
+        except ValueError as e:
+            print(e)
+            return
 
     else:
-        print("Invalid choice! Please select correct option.")
+        result = "Error: Invalid operation"
+
+    print(f"Result: {result}")
+
+
+if __name__ == "__main__":
+    main()
